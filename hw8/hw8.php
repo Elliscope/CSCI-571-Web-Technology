@@ -32,7 +32,7 @@
 
     <h1 align="center">Congress Information Search</h1>
     <div id="search" align="center">
-        <form name="congressSearchForm" action="" method="GET">
+        <form name="congressSearchForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
             <table>
                 <tr>
                     <td>Congress Database</td>
@@ -100,8 +100,39 @@
 
 <?php
 
- //store the states
- $states = array (
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+ 	$chamber = $_GET['chamber'];
+	$keyword = $_GET['keyword'];
+	$selectOption = $_GET['sel'];
+
+ 	if($selectOption == "legislators"){
+		//LegislatorSearch
+		$state_name = validateState($keyword);
+		if($state_name!=-1){
+			legislatorSearch($chamber,$state_name);
+		}else{
+			nameSearch($chamber,$keyword);
+		}
+	}else if($selectOption =="committees"){
+		//committees
+		CommitteesSearch($chamber,$keyword);
+	}else if($selectOption == "bills"){
+		//bills
+		BillsSearch($chamber,$keyword);
+	}else if($selectOption == "amendments"){
+		//ammendments
+		AmmendmentsSearch($chamber,$keyword);
+	}else if($selectOption == ""){
+		echo "IT'S EMPTY";
+	}
+ }
+
+function validateState($keyword){
+
+	$keyword = ucfirst(strtolower($keyword));
+	 //store the states
+ 	 $states = array (
             'AL'=>'Alabama',
             'AK'=>'Alaska',
             'AZ'=>'Arizona',
@@ -154,44 +185,113 @@
             'WI'=>'Wisconsin',
             'WY'=>'Wyoming',
         );
-
-
- if($_GET["submit"]){
-
- 	$chamber = $_GET['chamber'];
-	$keyword = $_GET['keyword'];
-	$selectOption = $_GET['sel'];
-
-
-
-
- 	if($selectOption == "legislators"){
-		//LegislatorSearch
-		legislatorSearch($chamber,$keyword);
-	}else if($selectOption =="committees"){
-		//committees
-		CommitteesSearch($chamber,$keyword);
-	}else if($selectOption == "bills"){
-		//bills
-		BillsSearch($chamber,$keyword);
-	}else if($selectOption == "amendments"){
-		//ammendments
-		AmmendmentsSearch($chamber,$keyword);
-	}else if($selectOption == ""){
-		echo "IT'S EMPTY";
+	foreach ($states as $ss => $s) {
+		if($keyword==$s){
+			$keyword= $ss ;
+			return $keyword;
+		}
 	}
- }
+	return -1;
+	// echo $keyword;
+}
+
+function nameSearch($chamber,$keyword){
+	$apikey = 'ad112f71df2e4109864ee87613db82d8';
+	$url_name = "https://congress.api.sunlightfoundation.com/legislators?chamber=house&query=".REPRESENTATIVE_NAME_HERE."&apikey=".$apikey;
+
+	//String Split
+	$pieces = explode(" ", (string)$keyword);
+	$res = "";
+	$result_item;
+
+	if(count($pieces) == 1){
+
+		if($pieces[0]==""){
+			echo "The API returned zero results for the request.";
+			return;
+		}
+
+		$url_name = "https://congress.api.sunlightfoundation.com/legislators?chamber=".$chamber."&query=".$pieces[0]."&apikey=".$apikey;
+		$res = file_get_contents($url_name);
+		$res = json_decode($res,true);
+
+		if($res["count"]==0){
+			echo "The API returned zero results for the request.";
+		}else{
+
+			echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
+			echo "<tr>";
+			echo "<th> Name </th>";
+			echo "<th> State </th>";
+			echo "<th>Chamber</th>";
+			echo "<th>View Details</th>";
+			echo "</tr>";
+
+			//form into table
+			foreach($res["results"] as $item) {
+			echo "<tr>";
+			echo "<td> ".$item["first_name"] ." ". $item["last_name"]."</td>";
+			echo "<td>".$item["state_name"]."</td>";
+			echo "<td>". $item["chamber"] ."</td>";
+			echo "<td><a href=' " . $item["website"]." '>View Details </a></td>";
+			echo "</tr>";
+			}
+			echo "</table>";
+		}
+
+	}else if(count($pieces)==2){
+		$url_first_name = "https://congress.api.sunlightfoundation.com/legislators?chamber=".$chamber."&query=".$pieces[0]."&apikey=".$apikey;
+		$url_last_name = "https://congress.api.sunlightfoundation.com/legislators?chamber=".$chamber."&query=".$pieces[1]."&apikey=".$apikey;
+
+		$res1 = file_get_contents($url_first_name);
+		$res2 = file_get_contents($url_last_name);
+
+		$res1 = json_decode($res1,true);
+		$res2 = json_decode($res2,true);
+
+		// print_r($res1);
+		// print_r($res2);
+
+		if($res1["count"]==0 ||$res2["count"]==0){
+			echo "The API returned zero results for the request.";
+		}else{
+			foreach($res1["results"] as $item1) {
+				foreach($res2["results"] as $item2) {
+					if($item1["first_name"] == $item2["first_name"]){
+						$res = $item1;
+					}
+				}
+			}
+			if($res!=""){
+			echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
+			echo "<tr>";
+			echo "<th> Name </th>";
+			echo "<th> State </th>";
+			echo "<th>Chamber</th>";
+			echo "<th>View Details</th>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td> ".$item["first_name"] ." ". $item["last_name"]."</td>";
+			echo "<td>".$item["state_name"]."</td>";
+			echo "<td>". $item["chamber"] ."</td>";
+			echo "<td><a href=' " . $item["website"]." '>View Details </a></td>";
+			echo "</tr>";
+			echo "</table>";
+			}
+			}}
+	else{
+		echo "The API returned zero results for the request.";
+	}
+}
+
 
 function legislatorSearch($chamber,$keyword){
+
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	//$url = "http://congress.api.sunlightfoundation.com/legislators?chamber=".rawurlencode($chamber)."&state=".rawurlencode($keyword)."&apikey=".rawurlencode($apikey);
-	$url_test = "http://congress.api.sunlightfoundation.com/legislators?chamber=house&state=WA&apikey=".$apikey;
-	// echo $url_test;
-	$res = file_get_contents("http://congress.api.sunlightfoundation.com/legislators?chamber=house&state=WA&apikey=ad112f71df2e4109864ee87613db82d8");
+	$url = "http://congress.api.sunlightfoundation.com/legislators?chamber=".$chamber."&state=".$keyword."&apikey=".$apikey;
+	$res = file_get_contents($url);
 	$res = json_decode($res, true);
 
-	// print_r($res);
-	//parsing the json object into table
 
 	echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
 	echo "<tr>";
@@ -204,7 +304,7 @@ function legislatorSearch($chamber,$keyword){
 	//form into table
 	foreach($res["results"] as $item) {
 	echo "<tr>";
-	echo "<td> ".$item["first_name"] . $item["last_name"]."</td>";
+	echo "<td> ".$item["first_name"] ." ". $item["last_name"]."</td>";
 	echo "<td>".$item["state_name"]."</td>";
 	echo "<td>". $item["chamber"] ."</td>";
 	echo "<td><a href=' " . $item["website"]." '>View Details </a></td>";
@@ -215,14 +315,14 @@ function legislatorSearch($chamber,$keyword){
 
 function CommitteesSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	//$url = "https://congress.api.sunlightfoundation.com/committees?committee_id=".rawurlencode($keyword)."&chamber=".rawurlencode($chamber)."&apikey=".$apikey ;
-	$url_test = "https://congress.api.sunlightfoundation.com/committees?committee_id=SSGA18&chamber=senate&apikey=".$apikey;
-	// echo $url_test;
-	$res = file_get_contents($url_test);
+	$url = "https://congress.api.sunlightfoundation.com/committees?committee_id=".rawurlencode($keyword)."&chamber=".rawurlencode($chamber)."&apikey=".$apikey ;
+	$res = file_get_contents($url);
 	$res = json_decode($res, true);
 
-	//print_r($res);
-	//parsing the json object into table
+	if($res["count"]==0||$keyword ==""){
+		echo "The API returned zero results for the request.";
+		return;
+	}
 
 	echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
 	echo "<tr>";
@@ -245,14 +345,19 @@ function CommitteesSearch($chamber,$keyword){
 
 function BillsSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	//$url = "https://congress.api.sunlightfoundation.com/bills?bill_id=BILL_ID_HERE&chamber=CHAMBER_TYPE_HERE&apikey=YOUR_API_KEY_HERE ;
+	$url = "https://congress.api.sunlightfoundation.com/bills?bill_id=".$keyword."&chamber=".$chamber."&apikey=".$apikey ;
 	$url_test = "https://congress.api.sunlightfoundation.com/bills?bill_id=s3271-114&chamber=senate&apikey=".$apikey;
-	// echo $url_test;
-	$res = file_get_contents($url_test);
+
+	$res = file_get_contents($url);
 	$res = json_decode($res, true);
+
 
 	//print_r($res);
 	//parsing the json object into table
+	if($res["count"]==0||$keyword ==""){
+		echo "The API returned zero results for the request.";
+		return;
+	}
 
 	echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
 	echo "<tr>";
@@ -277,14 +382,16 @@ function BillsSearch($chamber,$keyword){
 
 function AmmendmentsSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	//$url = "https://congress.api.sunlightfoundation.com/bills?bill_id=BILL_ID_HERE&chamber=CHAMBER_TYPE_HERE&apikey=YOUR_API_KEY_HERE ;
+	$url = "https://congress.api.sunlightfoundation.com/amendments?amendment_id=".$keyword."&chamber=".$chamber."&apikey=".$apikey;
 	$url_test = "https://congress.api.sunlightfoundation.com/amendments?amendment_id=samdt4946-114&chamber=senate&apikey=".$apikey;
 	// echo $url_test;
-	$res = file_get_contents($url_test);
+	$res = file_get_contents($url);
 	$res = json_decode($res, true);
 
-	//print_r($res);
-	//parsing the json is_object(var) into table
+	if($res["count"]==0||$keyword ==""){
+		echo "The API returned zero results for the request.";
+		return;
+	}
 
 	echo "<table align='center' style='border-collapse:collapse; margin-top:20px' border='1 solid black'>";
 	echo "<tr>";
