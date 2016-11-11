@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Congress API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="main.js"></script>
+    <style type="text/css">
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#"> <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> </a>
+                </li>
+                <li>
+                    <a href="http://sunlightfoundation.com/"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/logo.png" style="height:30px;length:70px; margin-left:660px">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar navbar-inverse navbar-fixed-left">
+            <a class="navbar-brand" href="#"></a>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Legislator</a>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Bills</a>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Committees</a>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorites</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container ">
+        	
+        		<h2 id="table-header">Legislator</h2>
+        		<hr>
+
+        		<div id = "legislatorTable" class="well">
+        		<nav class="navbar navbar-default">
+				    <ul class="nav navbar-nav">
+                      <li class="active"><a data-toggle="tab" href="#table_by_state">By State</a></li>
+                      <li><a data-toggle="tab" href="#table_by_house">House</a></li>
+                      <li><a data-toggle="tab" href="#table_by_senate">Senate</a></li>
+				    </ul>
+				</nav>
+				<div id = "dataTable" class="well">
+					<nav class="navbar navbar-default">
+					  <div class="container-fluid">
+					    <div class="navbar-header">
+					      <a class="navbar-brand" href="#">Legistator By State</a>
+					    </div>
+					    <ul class="nav navbar-nav navbar-right">
+					        <form class="navbar-form" role="search">
+					        <div class="input-group">
+					            <input type="text" class="form-control" placeholder="Search" name="q">
+					        </div>
+					        </form>
+					    </ul>
+					  </div>
+					</nav>
+                    <div >
+                        <table class="table" id ="table_by_state">
+                            <thead>
+                                <tr>
+                                    <th> Party </th>
+                                    <th> Name </th>
+                                    <th>Chamber</th>
+                                    <th>District</th>
+                                    <th> State </th>
+                                    <th>       </th>
+                                </tr>
+                            </thead>
+                    </div>
+                    <div id="table_by_house">
+                    </div>
+                    <div id="table_by_senate">
+                    </div>
+				</div>
+        	</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>
