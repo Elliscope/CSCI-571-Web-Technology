@@ -30,12 +30,16 @@ $(document).ready(function(){
 
                 var chamber = "<td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/";
                 if(item.chamber == "house"){
-                    chamber = chamber + "h.png>"+item.chamber+"</td>";
+                    chamber = chamber + "h.png>"+capitalizeFirstLetter(item.chamber)+"</td>";
                 }else if(item.chamber == "senate"){
-                    chamber = chamber + "s.png>"+item.chamber+"</td>";
+                    chamber = chamber + "s.png>"+capitalizeFirstLetter(item.chamber)+"</td>";
                 }
-
-                var district =  "<td>"+item.district+"</td>";
+                var district;
+                if(item.district == " "){
+                    district = "<td>N.A</td>";
+                }else{
+                    district =  "<td>District "+item.district+"</td>";
+                }
                 var state  = "<td>"+item.state_name+"</td>";
                 var viewDetails = "<td><button type='button' class='btn btn-primary'>View Details</button></td></tr>";
 
@@ -47,3 +51,8 @@ $(document).ready(function(){
 
  });
 
+
+//helper function
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
