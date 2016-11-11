@@ -8,6 +8,10 @@ var keyword;
 
 $(document).ready(function(){
    console.log("Here inside the document.ready function");
+   loadingByStateTable(chamber,keyword);
+ });
+
+function loadingByStateTable(chamber,keyword){
 
   var php_path = "backend/index.php?";
     $.ajax({
@@ -48,8 +52,7 @@ $(document).ready(function(){
                 
               });
         });
-
- });
+}
 
 
 //helper function
