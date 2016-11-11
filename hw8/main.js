@@ -8,13 +8,14 @@ var keyword;
 
 $(document).ready(function(){
    console.log("Here inside the document.ready function");
+
    loadingByStateTable(chamber,keyword);
  });
 
 function loadingByStateTable(chamber,keyword){
 
   var php_path = "backend/index.php?";
-    $.ajax({
+    $.ajax({ 
       url: php_path,
       data: {category: "legistlator",chamber: "house",keyword: "CA", }
     })
@@ -51,6 +52,8 @@ function loadingByStateTable(chamber,keyword){
                 $('#table_by_state').append(html);
                 
               });
+                var table_wrapper = "</table>";
+                $('#table_by_state').append(table_wrapper);
         });
 }
 
