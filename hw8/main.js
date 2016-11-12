@@ -52,8 +52,8 @@ function loadingByStateTable(chamber,keyword){
                 $('#table_by_state').append(html);
                 
               });
-                var table_wrapper = "</table>";
-                $('#table_by_state').append(table_wrapper);
+                // var table_wrapper = "</table>";
+                // $('#table_by_state').append(table_wrapper);
         });
 }
 
