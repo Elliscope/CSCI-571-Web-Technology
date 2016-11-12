@@ -19,10 +19,10 @@ if($category=="legistlator"){
 
 
 
-
+//"http://104.198.0.197:8080/legislators?apikey=".$apikey."&per_page=all"
 function legislatorSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	$url = "http://104.198.0.197:8080/legislators?chamber=".$chamber."&state=".$keyword."&apikey=".$apikey;
+	$url = "http://104.198.0.197:8080/legislators?apikey=".$apikey."&per_page=all";
 	$res = file_get_contents($url);
 	echo $res;
 	return $res;

@@ -37,7 +37,7 @@ function loadingByStateTable(chamber,keyword){
                 if(item.chamber == "house"){
                     chamber = chamber + "h.png>"+capitalizeFirstLetter(item.chamber)+"</td>";
                 }else if(item.chamber == "senate"){
-                    chamber = chamber + "s.png>"+capitalizeFirstLetter(item.chamber)+"</td>";
+                    chamber = chamber + "s.svg>"+capitalizeFirstLetter(item.chamber)+"</td>";
                 }
                 var district;
                 if(item.district == " "){
