@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Congress API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+     <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script data-require="angular.js@1.3.0" data-semver="1.3.0" src="https://code.angularjs.org/1.3.0/angular.js"></script>
+    <link href="main.css" rel="stylesheet">
+
+    <script src="dirPag-script.js"></script>
+    <script src="dirPagination/dirPagination.js"></script>
+    <script src="main.js"></script>
+
+    
+    <style type="text/css">
+    </style>
+
+</head>
+
+<body>
+<!--     <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div ng-controller="MyController" class="my-controller">
+          <h1>Tasty Paginated Menu</h1>
+
+          <small>this is in "MyController"</small>
+
+
+          <div class="row">
+            <div class="col-xs-4">
+              <h3>Meals Page: {{ currentPage }}</h3>
+            </div>
+            <div class="col-xs-4">
+              <label for="search">Search:</label>
+              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+              <label for="search">items per page:</label>
+              <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div>
+          </div>
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+
+              <ul>
+                <li dir-paginate="meal in meals | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ meal }}</li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div ng-controller="OtherController" class="other-controller">
+          <small>this is in "OtherController"</small>
+          <div class="text-center">
+          <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+    <div>
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#menu-toggle" id="menu-toggle"> <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> </a>
+                </li>
+                <li>
+                    <a href="http://sunlightfoundation.com/"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/logo.png" style="height:30px;length:70px; margin-left:660px">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Legislator</a>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>  Bills</a>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Committees</a>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorites</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="container ">
+
+                                <h2 id="table-header">Legislator</h2>
+                                <hr>
+
+                                <div id="legislatorTable" class="well">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#data_wrapper_by_state">By State</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#data_wrapper_by_house">House</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#data_wrapper_by_senate">Senate</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="data_wrapper_by_state" class="tab-pane fade in active well">
+                                            <nav class="navbar navbar-default">
+                                                <div class="container-fluid">
+                                                    <div class="navbar-header">
+                                                        <a class="navbar-brand" href="#">Legistator By State</a>
+                                                    </div>
+                                                    <ul class="nav navbar-nav navbar-right">
+                                                        <form class="navbar-form" role="search">
+                                                                <select>
+                                                                    <option value="ALL">All States</option>
+                                                                    <option value="AL">Alabama</option>
+                                                                    <option value="AK">Alaska</option>
+                                                                    <option value="AZ">Arizona</option>
+                                                                    <option value="AR">Arkansas</option>
+                                                                    <option value="CA">California</option>
+                                                                    <option value="CO">Colorado</option>
+                                                                    <option value="CT">Connecticut</option>
+                                                                    <option value="DE">Delaware</option>
+                                                                    <option value="DC">District Of Columbia</option>
+                                                                    <option value="FL">Florida</option>
+                                                                    <option value="GA">Georgia</option>
+                                                                    <option value="HI">Hawaii</option>
+                                                                    <option value="ID">Idaho</option>
+                                                                    <option value="IL">Illinois</option>
+                                                                    <option value="IN">Indiana</option>
+                                                                    <option value="IA">Iowa</option>
+                                                                    <option value="KS">Kansas</option>
+                                                                    <option value="KY">Kentucky</option>
+                                                                    <option value="LA">Louisiana</option>
+                                                                    <option value="ME">Maine</option>
+                                                                    <option value="MD">Maryland</option>
+                                                                    <option value="MA">Massachusetts</option>
+                                                                    <option value="MI">Michigan</option>
+                                                                    <option value="MN">Minnesota</option>
+                                                                    <option value="MS">Mississippi</option>
+                                                                    <option value="MO">Missouri</option>
+                                                                    <option value="MT">Montana</option>
+                                                                    <option value="NE">Nebraska</option>
+                                                                    <option value="NV">Nevada</option>
+                                                                    <option value="NH">New Hampshire</option>
+                                                                    <option value="NJ">New Jersey</option>
+                                                                    <option value="NM">New Mexico</option>
+                                                                    <option value="NY">New York</option>
+                                                                    <option value="NC">North Carolina</option>
+                                                                    <option value="ND">North Dakota</option>
+                                                                    <option value="OH">Ohio</option>
+                                                                    <option value="OK">Oklahoma</option>
+                                                                    <option value="OR">Oregon</option>
+                                                                    <option value="PA">Pennsylvania</option>
+                                                                    <option value="RI">Rhode Island</option>
+                                                                    <option value="SC">South Carolina</option>
+                                                                    <option value="SD">South Dakota</option>
+                                                                    <option value="TN">Tennessee</option>
+                                                                    <option value="TX">Texas</option>
+                                                                    <option value="UT">Utah</option>
+                                                                    <option value="VT">Vermont</option>
+                                                                    <option value="VA">Virginia</option>
+                                                                    <option value="WA">Washington</option>
+                                                                    <option value="WV">West Virginia</option>
+                                                                    <option value="WI">Wisconsin</option>
+                                                                    <option value="WY">Wyoming</option>
+                                                                </select>
+                                                        </form>
+                                                    </ul>
+                                                </div>
+                                            </nav>
+                                            <div>
+                                                <table class="table" id="table_by_state">
+                                                    <thead>
+                                                        <tr>
+                                                            <th> Party </th>
+                                                            <th> Name </th>
+                                                            <th>Chamber</th>
+                                                            <th>District</th>
+                                                            <th> State </th>
+                                                            <th> </th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div id="data_wrapper_by_house" class="tab-pane fade">
+                                            <p>tab 2</p>
+                                        </div>
+                                        <div id="data_wrapper_by_senate" class="tab-pane fade">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+
+</html>
