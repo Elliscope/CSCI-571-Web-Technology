@@ -19,15 +19,17 @@ function MyController($scope,$http) {
                   $scope.people_data[i].party = $scope.people_data[i].party.toLowerCase();
 
                   if($scope.people_data[i].chamber =="house"){
-                    $scope.people_data[i].chamber = "h.png";
+                    $scope.people_data[i].chamber_img = "h.png";
+                    $scope.people_data[i].chamber = "House";
                   }else{
-                    $scope.people_data[i].chamber = "s.svg";
+                    $scope.people_data[i].chamber_img = "s.svg";
+                    $scope.people_data[i].chamber = "Senate";
                   }
 
-                  if($scope.people_data[i].district == " "){
-                    $scope.people_data[i].district = "N.A";
+                  if($scope.people_data[i].district == null){
+                    $scope.people_data[i].district_name = "N.A";
                   }else{
-                    $scope.people_data[i].district =  "District"+$scope.people_data[i].district;
+                    $scope.people_data[i].district_name =  "District "+$scope.people_data[i].district;
                   }
 
                 }
