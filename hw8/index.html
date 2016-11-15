@@ -148,7 +148,7 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr dir-paginate="person in people_data | filter:q | itemsPerPage:pageSize" current-page="currentPage">
+                                                                            <tr dir-paginate="person in people_data | filter:q | orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
                                                                             <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png><td>
                                                                             <td>{{person.first_name}} {{person.last_name}}</td>
                                                                             <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber}}>{{person.chamber}}</td>
