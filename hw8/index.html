@@ -132,7 +132,7 @@
                                                 </div>
                                             </nav>
                                             <div>
-                                                        <div ng-controller="MyController" class="my-controller">
+                                                        <div ng-controller="SortByStateController" class="my-controller">
                                                             <br>
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
@@ -168,7 +168,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div ng-controller="OtherController" class="other-controller">
+                                                        <div ng-controller="SortByStatePageController" class="other-controller">
                                                             <div class="text-center">
                                                                 <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
                                                             </div>
@@ -178,43 +178,6 @@
                                         <div id="data_wrapper_by_house" class="tab-pane fade">
                                             <label for="search">Search:</label>
                                             <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
-                                            <div ng-controller="MyController" class="my-controller">
-                                                <br>
-
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th> Party </th>
-                                                                    <th> Name </th>
-                                                                    <th>Chamber</th>
-                                                                    <th>District</th>
-                                                                    <th> State </th>
-                                                                    <th>       </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr dir-paginate="person in people_data | filter:q | itemsPerPage:pageSize" current-page="currentPage">
-                                                                <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png><td>
-                                                                <td>{{person.first_name}} {{person.last_name}}</td>
-                                                                <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber}}>{{person.chamber}}</td>
-                                                                <td>{{person.district}}</td>
-                                                                <td>{{person.state_name}}</td>
-                                                                <td><button type='button' class='btn btn-primary'>View Details</button></td></tr>
-                                                            </tr>
-                                                        </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div ng-controller="OtherController" class="other-controller">
-                                                <small>this is in "OtherController"</small>
-                                                <div class="text-center">
-                                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div id="data_wrapper_by_senate" class="tab-pane fade">
                                         </div>

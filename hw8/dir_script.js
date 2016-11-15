@@ -2,7 +2,7 @@
 
 var myApp = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
-function MyController($scope,$http) {
+function SortByStateController($scope,$http) {
 
   $scope.currentPage = 1;
   $scope.pageSize = 10;
@@ -10,7 +10,7 @@ function MyController($scope,$http) {
 
 
     var php_path = "backend/index.php?";
-     $http.get("backend/index.php?category=legistlator&chamber=house&keyword=CA")
+     $http.get("backend/index.php?category=legistlator&chamber=&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
         console.log($scope.people_data);
@@ -43,11 +43,11 @@ function MyController($scope,$http) {
 
 }
 
-function OtherController($scope) {
+function SortByStatePageController($scope) {
   $scope.pageChangeHandler = function(num) {
     console.log('going to page ' + num);
   };
 }
 
-myApp.controller('MyController', MyController);
-myApp.controller('OtherController', OtherController);
+myApp.controller('SortByStateController', SortByStateController);
+myApp.controller('SortByStatePageController', SortByStatePageController);
