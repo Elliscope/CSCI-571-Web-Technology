@@ -38,6 +38,7 @@ function MyController($scope,$http) {
   $scope.pageChangeHandler = function(num) {
       console.log('list page changed to ' + num);
   };
+
 }
 
 function OtherController($scope) {
