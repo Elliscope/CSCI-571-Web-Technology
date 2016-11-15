@@ -74,7 +74,7 @@
                                                     <ul class="nav navbar-nav navbar-right">
                                                         <form class="navbar-form" role="search">
                                                             <select ng-model="q" id="search" class="form-control">
-                                                                <option value="ALL">All States</option>
+                                                                <option selected value="">All States</option>
                                                                 <option value="Alabama">Alabama</option>
                                                                 <option value="Alaska">Alaska</option>
                                                                 <option value="Arizona">Arizona</option>
@@ -148,7 +148,7 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr dir-paginate="person in people_data | filter:q | orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                            <tr dir-paginate="person in people_data | filter:q:true | orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
                                                                             <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png><td>
                                                                             <td>{{person.first_name}} {{person.last_name}}</td>
                                                                             <td><img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber}}>{{person.chamber}}</td>
