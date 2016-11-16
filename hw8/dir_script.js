@@ -68,10 +68,6 @@ function SortByStateController($scope,$http) {
 
 }
 
-function SortByStatePageController($scope) {
-  $scope.pageChangeHandler = function(num) {
-  };
-}
 
 function SortByHouseController($scope,$http) {
 
@@ -139,10 +135,7 @@ function SortByHouseController($scope,$http) {
 
 }
 
-function SortByHousePageController($scope) {
-  $scope.pageChangeHandler = function(num) {
-  };
-}
+
 
 function SortBySenateController($scope,$http) {
 
@@ -210,7 +203,7 @@ function SortBySenateController($scope,$http) {
 
 }
 
-function SortBySenatePageController($scope) {
+function SortPageController($scope) {
   $scope.pageChangeHandler = function(num) {
   };
 }
@@ -277,10 +270,10 @@ function updateBillInfo(bio_bills){
 
 
 myApp.controller('SortByStateController', SortByStateController);
-myApp.controller('SortByStatePageController', SortByStatePageController);
+myApp.controller('SortPageController', SortPageController);
 
 myApp.controller('SortByHouseController', SortByHouseController);
-myApp.controller('SortByHousePageController', SortByHousePageController);
+myApp.controller('SortPageController', SortPageController);
 
 myApp.controller('SortBySenateController', SortBySenateController);
-myApp.controller('SortBySenatePageController', SortBySenatePageController);
+myApp.controller('SortPageController', SortPageController);
