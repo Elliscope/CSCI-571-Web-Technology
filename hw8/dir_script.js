@@ -106,12 +106,16 @@ function updateBioBasicInfo(bio_basic){
         $("#pro_party_img").attr('src','http://cs-server.usc.edu:45678/hw/hw8/images/'+bio.party.toLowerCase()+'.png');
         
         $("#st_val").html(bio.term_start);
-        $("#ed_val").html(bio.term_start);
+        $("#en_val").html(bio.term_end);
         $("#").html(bio.term_end);
         $("#of").html(bio.office);
         $("#sta_val").html(bio.state_name);
         $("#fa_val").html(bio.fax);
         $("#bir_val").html(bio.birthday);
+
+        $("#fb_link").attr("href", "https://www.twitter.com/"+ bio.twiter_id);
+        $("#tw_link").attr("href", "https://www.facebook.com/"+ bio.facebook_id);
+        $("#wb_link").attr("href", bio.website);
 }
 
 

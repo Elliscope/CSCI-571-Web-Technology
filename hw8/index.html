@@ -172,7 +172,7 @@
                                                                                     <td>{{person.district_name}}</td>
                                                                                     <td>{{person.state_name}}</td>
                                                                                     <td>
-                                                                                        <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                        <button  ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -199,7 +199,7 @@
                                           <div class="item">
                                          
                                  
-                                     <button href="#myCarousel" data-slide="prev"type='button' class='glyphicon glyphicon-menu-left'>Details</button>   
+                                     <button href="#myCarousel" data-slide="prev"type='button' class='glyphicon glyphicon-menu-left btn-lg'>Details</button>   
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div>
@@ -219,7 +219,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <p>Committees</p>
+                                                            <h4>Committees</h4>
                                                             <hr>
                                                             <table id="personal_com">
                                                                 <thead>
@@ -241,11 +241,15 @@
                                                                     <tr><td>State</td><td id="sta_val">State</td></tr>
                                                                     <tr><td>Birthday</td><td id="bir_val">Birthday</td></tr>
                                                                     <tr><td>Fax</td><td id="fa_val">Fax</td></tr>
-                                                                    <tr><td>Social Links   </td><td id="soci_val">Social Media</td></tr>
+                                                                    <tr><td>Social Links   </td>
+                                                                        
+                                                                    <td><a  id="tw_link"  href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png'></a>
+                                                                    <a id="fb_link"  href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/f.png'></a>
+                                                                    <a id="wb_link" href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/w.png'></a>           </td></tr>
                                                                 </table>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                 <p>Bills</p>
+                                                                 <h4>Bills</h4>
                                                                  <hr>
                                                                 <table id="personal_bills">
                                                                     <thead>
