@@ -56,18 +56,11 @@
                                 <hr>
 
                                 <div id="legislatorTable" class="well">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#data_wrapper_by_state">By State</a>
-                                        </li>
-                                        <li><a data-toggle="tab" href="#data_wrapper_by_house">House</a>
-                                        </li>
-                                        <li><a data-toggle="tab" href="#data_wrapper_by_senate">Senate</a>
-                                        </li>
-                                    </ul>
+
                                     <div class="tab-content">
                                         <div class="container">
                                       <br>
-                                      <div id="myCarousel" class="slide" data-ride="carousel">
+                                      <div id="myCarousel" class="slide" data-ride="carousel" data-interval="false">
                                         <!-- Indicators -->
                                         <ol class="carousel-indicators">
                                           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -77,6 +70,14 @@
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner" role="listbox">
                                           <div class="item active">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#data_wrapper_by_state">By State</a>
+                                                </li>
+                                                <li><a data-toggle="tab" href="#data_wrapper_by_house">House</a>
+                                                </li>
+                                                <li><a data-toggle="tab" href="#data_wrapper_by_senate">Senate</a>
+                                                </li>   
+                                            </ul>
                                             <div id="data_wrapper_by_state" class="tab-pane fade in active well">
                                                 <nav class="navbar navbar-default">
                                                     <div class="container-fluid">
@@ -171,7 +172,7 @@
                                                                                     <td>{{person.district_name}}</td>
                                                                                     <td>{{person.state_name}}</td>
                                                                                     <td>
-                                                                                        <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" data-slide="next"type='button' class='btn btn-primary'>View Details</button>
+                                                                                        <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -196,7 +197,78 @@
                                           </div>
 
                                           <div class="item">
-                                            <button href="#myCarousel" data-slide="prev"type='button' class='btn btn-primary'>Back</button>
+                                         
+                                 
+                                     <button href="#myCarousel" data-slide="prev"type='button' class='glyphicon glyphicon-menu-left'>Details</button>   
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div>
+                                                        <div class="col-lg-12">
+                                                         <div class="col-lg-6">
+                                                            <div class="col-lg-4">
+                                                                <img width='140' height='190' id="pro_img" src="">
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                            <table>
+                                                                <tr><td id="pro_name"></td></tr>
+                                                                <tr><td id="pro_email"></td></tr>
+                                                                <tr><td>Chamber</td><td id="pro_chamber"></td></tr>
+                                                                <tr><td id="pro_contact"></td></tr>
+                                                                <tr><td><img height='30px' width='30px' id="pro_party_img" src=""></td><td id="pro_party"></td><tr>
+                                                            </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <p>Committees</p>
+                                                            <hr>
+                                                            <table id="personal_com">
+                                                                <thead>
+                                                                  <tr>
+                                                                    <th> Chamber </th>
+                                                                    <th> Committee ID </th>
+                                                                    <th> Name</th>
+                                                                  </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-6">
+                                                                <table id="personal_basic">
+                                                                    <tr><td>Start Term</td><td id="st_val">Start Term</td></tr>
+                                                                    <tr><td>End Term</td><td id="en_val">End Term</td></tr>
+                                                                    <tr><td>Term</td><td id="te_val">Term</td></tr>
+                                                                    <tr><td>Office</td><td id="of_val">Office</td></tr>
+                                                                    <tr><td>State</td><td id="sta_val">State</td></tr>
+                                                                    <tr><td>Birthday</td><td id="bir_val">Birthday</td></tr>
+                                                                    <tr><td>Fax</td><td id="fa_val">Fax</td></tr>
+                                                                    <tr><td>Social Links   </td><td id="soci_val">Social Media</td></tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                 <p>Bills</p>
+                                                                 <hr>
+                                                                <table id="personal_bills">
+                                                                    <thead>
+                                                                      <tr>
+                                                                        <th> Bill ID </th>
+                                                                        <th> Title </th>
+                                                                        <th> Chamber</th>
+                                                                        <th> Congress</th>
+                                                                        <th> Link</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
+                                            
                                           </div>
                                         </div>
                                       </div>
