@@ -5,7 +5,7 @@ $category = $_GET['category'];
 $chamber = $_GET['chamber'];
 $keyword = $_GET['keyword'];
 $bioguide = $_GET['bioguide'];
-
+$bill_active = $_GET['bill_active'];
 
 // echo $chamber;
 // echo $keyword ;
@@ -76,14 +76,18 @@ function CommitteesSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
 	$url = "http://104.198.0.197:8080/committees?committee_id=".rawurlencode($keyword)."&chamber=".rawurlencode($chamber)."&apikey=".$apikey ;
 	$res = file_get_contents($url);
+	echo $res;
 	return $res;
 }
 
+
 function BillsSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	$url = "http://104.198.0.197:8080/bills?bill_id=".$keyword."&chamber=".$chamber."&apikey=".$apikey ;
+	$url = "http://104.198.0.197:8080/bills?per_page=50&last_version.urls.pdf__exists=true&apikey=".$apikey ;
 	$res = file_get_contents($url);
+	echo $res;
 	return $res;
+
 }
 
 ?>

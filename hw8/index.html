@@ -433,7 +433,271 @@
                     </div>
                 </div>
                 <div class="tab-pane container-fluid" id="bills_sidebar_content">
-                <h>bills side bar</h>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="container ">
+
+                                <h2 id="table-header">Bills</h2>
+                                <hr>
+
+                                <div id="legislatorTable" class="well">
+
+                                    <br>
+                                    <div id="myCarousel" class="slide" data-ride="carousel" data-interval="false">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item active">
+                                                <div class="container">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active">
+                                                            <a href="#active_bill" data-toggle="tab">Active Bills</a>
+                                                        </li>
+                                                        <li >
+                                                            <a href="#new_bill" data-toggle="tab">New Bills</a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <div class="tab-content ">
+                                                        <div class="tab-pane active" id="active_bill">
+                                                            <nav class="navbar navbar-default">
+                                                                <div class="container-fluid">
+                                                                    <div class="navbar-header">
+                                                                        <a class="navbar-brand" href="#">Active Bills</a>
+                                                                    </div>
+                                                                    <ul class="nav navbar-nav navbar-right">
+                                                                        <form class="navbar-form" role="search">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
+                                                                        </form>
+                                                                    </ul>
+                                                                </div>
+                                                            </nav>
+                                                            <div>
+                                                                <div ng-controller="ActiveBillController" class="my-controller">
+                                                                    <br>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th> Bill ID </th>
+                                                                                        <th> Bill Type </th>
+                                                                                        <th> Chamber </th>
+                                                                                        <th> Introduced On </th>
+                                                                                        <th> Sponsor </th>
+                                                                                        <th> </th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr dir-paginate="bill in bill_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                        <td>{{bill.bill_id}}
+                                                                                        </td>
+                                                                                        <td>{{bill.bill_type}}</td>
+                                                                                        <td>
+                                                                                            {{bill.chamber}}
+                                                                                        </td>
+                                                                                        <td>{{bill.introduced_on}}</td>
+                                                                                        <td>
+                                                                                            <button ng-click="viewDetails(bill.bioguide_id,bill.chamber,bill.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div ng-controller="SortPageController" class="other-controller">
+                                                                    <div class="text-center">
+                                                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane active" id="new_bill">
+                                                            <nav class="navbar navbar-default">
+                                                                <div class="container-fluid">
+                                                                    <div class="navbar-header">
+                                                                        <a class="navbar-brand" href="#">New Bills</a>
+                                                                    </div>
+                                                                    <ul class="nav navbar-nav navbar-right">
+                                                                        <form class="navbar-form" role="search">
+                                                                              <label for="search">Search:</label>
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                        </form>
+                                                                    </ul>
+                                                                </div>
+                                                            </nav>
+                                                            <div>
+                                                                <div ng-controller="SortBySenateController" class="my-controller">
+                                                                    <br>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th> Party </th>
+                                                                                        <th> Name </th>
+                                                                                        <th>Chamber</th>
+                                                                                        <th> State </th>
+                                                                                        <th> </th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                        <td>
+                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                        </td>
+                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>
+                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                        </td>
+                                                                                        <td>{{person.state_name}}</td>
+                                                                                        <td>
+                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div ng-controller="SortPageController" class="other-controller">
+                                                                    <div class="text-center">
+                                                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="item">
+
+                                                <button href="#myCarousel" data-slide="prev" type='button' class='glyphicon glyphicon-menu-left btn-lg'>Details</button>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div>
+                                                            <div class="col-lg-12">
+                                                                <div class="col-lg-6">
+                                                                    <div class="col-lg-4">
+                                                                        <img width='140' height='190' id="pro_img" src="">
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td id="pro_name"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td id="pro_email"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Chamber</td>
+                                                                                <td id="pro_chamber"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td id="pro_contact"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><img height='30px' width='30px' id="pro_party_img" src=""></td>
+                                                                                <td id="pro_party"></td>
+                                                                                <tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <h4>Committees</h4>
+                                                                    <hr>
+                                                                    <table id="personal_com">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th> Chamber </th>
+                                                                                <th> Committee ID </th>
+                                                                                <th> Name</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-6">
+                                                                        <table id="personal_basic">
+                                                                            <tr>
+                                                                                <td>Start Term</td>
+                                                                                <td id="st_val">Start Term</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>End Term</td>
+                                                                                <td id="en_val">End Term</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Term</td>
+                                                                                <td id="te_val">Term</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Office</td>
+                                                                                <td id="of_val">Office</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>State</td>
+                                                                                <td id="sta_val">State</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Birthday</td>
+                                                                                <td id="bir_val">Birthday</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Fax</td>
+                                                                                <td id="fa_val">Fax</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Social Links </td>
+
+                                                                                <td>
+                                                                                    <a id="tw_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png'></a>
+                                                                                    <a id="fb_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/f.png'></a>
+                                                                                    <a id="wb_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/w.png'></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <h4>Bills</h4>
+                                                                        <hr>
+                                                                        <table id="personal_bills">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th> Bill ID </th>
+                                                                                    <th> Title </th>
+                                                                                    <th> Chamber</th>
+                                                                                    <th> Congress</th>
+                                                                                    <th> Link</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane container-fluid" id="committees_sidebar_content">
 

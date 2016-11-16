@@ -11,8 +11,8 @@ function SortByStateController($scope,$http) {
   $scope.bio_bills = [];
   $scope.bio_com = [];
 
-    var php_path = "backend/index.php?";
-     $http.get("backend/index.php?category=legistlator&chamber=&keyword=")
+    var php_path = "index.php?";
+     $http.get("index.php?category=legistlator&chamber=&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
                 for (var i = 0; i <= response.data.count; i++) {
@@ -42,7 +42,7 @@ function SortByStateController($scope,$http) {
     //have the bioguide value. Call three function to get the info separately.
 
     //reget the personal info: 
-     $http.get("backend/index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_basic = response.data.results;
         updateBioBasicInfo($scope.bio_basic);
@@ -50,7 +50,7 @@ function SortByStateController($scope,$http) {
     });
 
   //get the bills that the legistlator sponsors
-  $http.get("backend/index.php?category=bills&bioguide="+bioguide)
+  $http.get("index.php?category=bills&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_bills = response.data.results;
         updateBillInfo($scope.bio_bills);
@@ -58,7 +58,7 @@ function SortByStateController($scope,$http) {
 
 
   //get the committee that the legistlator belongs to
-    $http.get("backend/index.php?category=committees&bioguide="+bioguide)
+    $http.get("index.php?category=committees&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_com = response.data.results;
         updateCommitteeInfo($scope.bio_com);
@@ -78,8 +78,8 @@ function SortByHouseController($scope,$http) {
   $scope.bio_bills = [];
   $scope.bio_com = [];
 
-    var php_path = "backend/index.php?";
-     $http.get("backend/index.php?category=legistlator&chamber=house&keyword=")
+    var php_path = "index.php?";
+     $http.get("index.php?category=legistlator&chamber=house&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
                 for (var i = 0; i <= response.data.count; i++) {
@@ -109,7 +109,7 @@ function SortByHouseController($scope,$http) {
     //have the bioguide value. Call three function to get the info separately.
 
     //reget the personal info: 
-     $http.get("backend/index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_basic = response.data.results;
         updateBioBasicInfo($scope.bio_basic);
@@ -117,7 +117,7 @@ function SortByHouseController($scope,$http) {
     });
 
   //get the bills that the legistlator sponsors
-  $http.get("backend/index.php?category=bills&bioguide="+bioguide)
+  $http.get("index.php?category=bills&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_bills = response.data.results;
         updateBillInfo($scope.bio_bills);
@@ -125,7 +125,7 @@ function SortByHouseController($scope,$http) {
 
 
   //get the committee that the legistlator belongs to
-    $http.get("backend/index.php?category=committees&bioguide="+bioguide)
+    $http.get("index.php?category=committees&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_com = response.data.results;
         updateCommitteeInfo($scope.bio_com);
@@ -146,8 +146,8 @@ function SortBySenateController($scope,$http) {
   $scope.bio_bills = [];
   $scope.bio_com = [];
 
-    var php_path = "backend/index.php?";
-     $http.get("backend/index.php?category=legistlator&chamber=senate&keyword=")
+    var php_path = "index.php?";
+     $http.get("index.php?category=legistlator&chamber=senate&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
                 for (var i = 0; i <= response.data.count; i++) {
@@ -177,7 +177,7 @@ function SortBySenateController($scope,$http) {
     //have the bioguide value. Call three function to get the info separately.
 
     //reget the personal info: 
-     $http.get("backend/index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_basic = response.data.results;
         updateBioBasicInfo($scope.bio_basic);
@@ -185,7 +185,7 @@ function SortBySenateController($scope,$http) {
     });
 
   //get the bills that the legistlator sponsors
-  $http.get("backend/index.php?category=bills&bioguide="+bioguide)
+  $http.get("index.php?category=bills&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_bills = response.data.results;
         updateBillInfo($scope.bio_bills);
@@ -193,7 +193,76 @@ function SortBySenateController($scope,$http) {
 
 
   //get the committee that the legistlator belongs to
-    $http.get("backend/index.php?category=committees&bioguide="+bioguide)
+    $http.get("index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
+
+function ActiveBillController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+
+    var php_path = "index.php?";
+     $http.get("index.php?category=bills")
+    .then(function(response) {
+        $scope.bill_data = response.data.results;
+        console.log(response.data);
+        console.log($scope.bill_data);
+                for (var i = 0; i <= response.data.count; i++) {
+                  // $scope.bill_data[i].party = $scope.bill_data[i].party.toLowerCase();
+
+                  // if($scope.bill_data[i].chamber =="house"){
+                  //   $scope.bill_data[i].chamber_img = "h.png";
+                  //   $scope.bill_data[i].chamber = "House";
+                  // }else{
+                  //   $scope.bill_data[i].chamber_img = "s.svg";
+                  //   $scope.bill_data[i].chamber = "Senate";
+                  // }
+                  // if($scope.bill_data[i].district == null){
+                  //   $scope.bill_data[i].district_name = "N.A";
+                  // }else{
+                  //   $scope.bill_data[i].district_name =  "District "+$scope.bill_data[i].district;
+                  // }
+                }
+    });
+
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("index.php?category=committees&bioguide="+bioguide)
     .then(function(response) {
         $scope.bio_com = response.data.results;
         updateCommitteeInfo($scope.bio_com);
@@ -207,6 +276,7 @@ function SortPageController($scope) {
   $scope.pageChangeHandler = function(num) {
   };
 }
+
 
 
 function updateBioBasicInfo(bio_basic){
@@ -270,10 +340,13 @@ function updateBillInfo(bio_bills){
 
 
 myApp.controller('SortByStateController', SortByStateController);
-myApp.controller('SortPageController', SortPageController);
+
 
 myApp.controller('SortByHouseController', SortByHouseController);
-myApp.controller('SortPageController', SortPageController);
+
 
 myApp.controller('SortBySenateController', SortBySenateController);
+myApp.controller('ActiveBillController', ActiveBillController);
+
+
 myApp.controller('SortPageController', SortPageController);
