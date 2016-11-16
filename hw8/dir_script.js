@@ -136,7 +136,6 @@ function SortByHouseController($scope,$http) {
 }
 
 
-
 function SortBySenateController($scope,$http) {
 
   $scope.currentPage = 1;
@@ -309,6 +308,63 @@ function NewBillController($scope,$http) {
 
 }
 
+function HouseCommitteesController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+
+    var php_path = "index.php?";
+     $http.get("index.php?category=committees&chamber=house")
+    .then(function(response) {
+        $scope.committees_house = response.data.results;
+        console.log("Active Bill Data");
+        console.log($scope.committees_house);
+    });
+
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
+
+
+
+
+
 function SortPageController($scope) {
   $scope.pageChangeHandler = function(num) {
   };
@@ -386,5 +442,6 @@ myApp.controller('SortBySenateController', SortBySenateController);
 myApp.controller('ActiveBillController', ActiveBillController);
 myApp.controller('NewBillController', NewBillController);
 
+myApp.controller('HouseCommitteesController', HouseCommitteesController);
 
 myApp.controller('SortPageController', SortPageController);
