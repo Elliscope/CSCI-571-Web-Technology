@@ -32,9 +32,7 @@ if($category=="legistlator"){
 		return legistlatorCommitteesSearch($bioguide);
 	}
 	return CommitteesSearch($chamber,$keyword);
-
 }
-
 
 
 //"http://104.198.0.197:8080/legislators?apikey=".$apikey."&per_page=all"
@@ -77,14 +75,6 @@ function legistlatorCommitteesSearch($bioguide){
 
 
 
-function CommitteesSearch($chamber,$keyword){
-	$apikey = 'ad112f71df2e4109864ee87613db82d8';
-	$url = "http://104.198.0.197:8080/committees?committee_id=".rawurlencode($keyword)."&chamber=".rawurlencode($chamber)."&apikey=".$apikey ;
-	$res = file_get_contents($url);
-	echo $res;
-	return $res;
-}
-
 
 function ActiveBillsSearch($chamber,$keyword){
 	$apikey = 'ad112f71df2e4109864ee87613db82d8';
@@ -103,5 +93,14 @@ function NewBillsSearch($chamber,$keyword){
 	return $res;
 
 }
+
+function CommitteesSearch($chamber,$keyword){
+	$apikey = 'ad112f71df2e4109864ee87613db82d8';
+	$url = "http://104.198.0.197:8080/committees?committee_id=".rawurlencode($keyword)."&chamber=".rawurlencode($chamber)."&apikey=".$apikey ;
+	$res = file_get_contents($url);
+	echo $res;
+	return $res;
+}
+
 
 ?>

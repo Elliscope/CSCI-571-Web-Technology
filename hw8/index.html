@@ -37,7 +37,7 @@
                     </li>
                     <li><a data-toggle="tab" href="#committees_sidebar_content"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Committees</a>
                     </li>
-                    <li><a data-toggle="tab" href="#committees_sidebar_content"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorites</a>
+                    <li><a data-toggle="tab" href="#fav_sidebar_content"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorites</a>
                     </li>
                 </ul>
             </div>
@@ -201,7 +201,7 @@
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
@@ -262,7 +262,7 @@
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
@@ -529,7 +529,7 @@
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
@@ -733,52 +733,48 @@
                                                     </ul>
 
                                                     <div class="tab-content ">
-                                                        <div class="tab-pane" id="committees_house">
-                                                         
-
+                                                        <div class="tab-pane active" id="committees_house">
                                                             <nav class="navbar navbar-default">
                                                                 <div class="container-fluid">
                                                                     <div class="navbar-header">
-                                                                        <a class="navbar-brand" href="#">Legistator By House</a>
+                                                                        <a class="navbar-brand" href="#">Committees By House</a>
                                                                     </div>
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
                                                             </nav>
                                                             <div>
-                                                                <div ng-controller="SortByHouseController" class="my-controller">
+                                                                <div ng-controller="HouseCommitteesController" class="my-controller">
                                                                     <br>
                                                                     <div class="panel panel-default">
                                                                         <div class="panel-body">
                                                                             <table class="table">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th> Party </th>
-                                                                                        <th> Name </th>
-                                                                                        <th>Chamber</th>
-                                                                                        <th>District</th>
-                                                                                        <th> State </th>
-                                                                                        <th> </th>
+                                                                                        <th> Chamber</th>
+                                                                                        <th> Committee ID </th>
+                                                                                        <th> Name</th>
+                                                                                        <th> Parent Committee</th>
+                                                                                        <th> Contact</th>
+                                                                                        <th> Office</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                    <tr dir-paginate="committee in committees_house  | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                            {{committee.chamber}}
                                                                                         </td>
-                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>{{committee.committee_id}}</td>
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                            {{committee.name}}
                                                                                         </td>
-                                                                                        <td>{{person.district_name}}</td>
-                                                                                        <td>{{person.state_name}}</td>
-                                                                                        <td>
-                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
-                                                                                        </td>
+                                                                                        <td>{{committee.committee_id}}</td>
+                                                                                        <td>{{committee.phone}}</td>
+                                                                                        <td>{{committee.office}}</td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -794,51 +790,47 @@
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane" id="committees_senate">
-                                                         
-
                                                             <nav class="navbar navbar-default">
                                                                 <div class="container-fluid">
                                                                     <div class="navbar-header">
-                                                                        <a class="navbar-brand" href="#">Legistator By House</a>
+                                                                        <a class="navbar-brand" href="#">Committees By Senate</a>
                                                                     </div>
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
                                                             </nav>
                                                             <div>
-                                                                <div ng-controller="SortByHouseController" class="my-controller">
+                                                                <div ng-controller="SenateCommitteesController" class="my-controller">
                                                                     <br>
                                                                     <div class="panel panel-default">
                                                                         <div class="panel-body">
                                                                             <table class="table">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th> Party </th>
-                                                                                        <th> Name </th>
-                                                                                        <th>Chamber</th>
-                                                                                        <th>District</th>
-                                                                                        <th> State </th>
-                                                                                        <th> </th>
+                                                                                        <th> Chamber</th>
+                                                                                        <th> Committee ID </th>
+                                                                                        <th> Name</th>
+                                                                                        <th> Parent Committee</th>
+                                                                                        <th> Contact</th>
+                                                                                        <th> Office</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                    <tr dir-paginate="committee in committees_senate  | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                            {{committee.chamber}}
                                                                                         </td>
-                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>{{committee.committee_id}}</td>
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                            {{committee.name}}
                                                                                         </td>
-                                                                                        <td>{{person.district_name}}</td>
-                                                                                        <td>{{person.state_name}}</td>
-                                                                                        <td>
-                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
-                                                                                        </td>
+                                                                                        <td>{{committee.committee_id}}</td>
+                                                                                        <td>{{committee.phone}}</td>
+                                                                                        <td>{{committee.office}}</td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -854,50 +846,47 @@
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane" id="committees_joint">
-
-                                                         
-
                                                             <nav class="navbar navbar-default">
                                                                 <div class="container-fluid">
                                                                     <div class="navbar-header">
-                                                                        <a class="navbar-brand" href="#">Legistator By Senate</a>
+                                                                        <a class="navbar-brand" href="#">Committees By Joint</a>
                                                                     </div>
                                                                     <ul class="nav navbar-nav navbar-right">
                                                                         <form class="navbar-form" role="search">
                                                                               <label for="search">Search:</label>
-                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="">
                                                                         </form>
                                                                     </ul>
                                                                 </div>
                                                             </nav>
                                                             <div>
-                                                                <div ng-controller="SortBySenateController" class="my-controller">
+                                                                <div ng-controller="JointCommitteesController" class="my-controller">
                                                                     <br>
                                                                     <div class="panel panel-default">
                                                                         <div class="panel-body">
                                                                             <table class="table">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th> Party </th>
-                                                                                        <th> Name </th>
-                                                                                        <th>Chamber</th>
-                                                                                        <th> State </th>
-                                                                                        <th> </th>
+                                                                                        <th> Chamber</th>
+                                                                                        <th> Committee ID </th>
+                                                                                        <th> Name</th>
+                                                                                        <th> Parent Committee</th>
+                                                                                        <th> Contact</th>
+                                                                                        <th> Office</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                    <tr dir-paginate="committee in committees_joint  | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                            {{committee.chamber}}
                                                                                         </td>
-                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>{{committee.committee_id}}</td>
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                            {{committee.name}}
                                                                                         </td>
-                                                                                        <td>{{person.state_name}}</td>
-                                                                                        <td>
-                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
-                                                                                        </td>
+                                                                                        <td>{{committee.committee_id}}</td>
+                                                                                        <td>{{committee.phone}}</td>
+                                                                                        <td>{{committee.office}}</td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -1034,6 +1023,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="tab-pane container-fluid" id="fav_sidebar_content">
                 </div>
             </div>
             </div>

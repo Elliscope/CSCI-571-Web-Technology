@@ -216,8 +216,6 @@ function ActiveBillController($scope,$http) {
      $http.get("index.php?category=bills&bill_active=true")
     .then(function(response) {
         $scope.bill_data = response.data.results;
-        console.log("Active Bill Data");
-        console.log($scope.bill_data);
     });
 
   $scope.pageChangeHandler = function(num) {
@@ -269,8 +267,6 @@ function NewBillController($scope,$http) {
      $http.get("index.php?category=bills&bill_active=false")
     .then(function(response) {
         $scope.new_bill_data = response.data.results;
-        console.log("New Bill Data");
-        console.log($scope.new_bill_data);
     });
 
   $scope.pageChangeHandler = function(num) {
@@ -322,7 +318,7 @@ function HouseCommitteesController($scope,$http) {
      $http.get("index.php?category=committees&chamber=house")
     .then(function(response) {
         $scope.committees_house = response.data.results;
-        console.log("Active Bill Data");
+        console.log("Commite House Info");
         console.log($scope.committees_house);
     });
 
@@ -361,6 +357,111 @@ function HouseCommitteesController($scope,$http) {
 
 }
 
+function SenateCommitteesController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+
+    var php_path = "index.php?";
+     $http.get("index.php?category=committees&chamber=senate")
+    .then(function(response) {
+        $scope.committees_senate = response.data.results;
+        console.log("Commite House Info");
+        console.log($scope.committees_house);
+    });
+
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
+
+function JointCommitteesController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+
+    var php_path = "index.php?";
+     $http.get("index.php?category=committees&chamber=joint")
+    .then(function(response) {
+        $scope.committees_joint = response.data.results;
+        console.log("Commite House Info");
+        console.log($scope.committees_joint);
+    });
+
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
 
 
 
@@ -443,5 +544,7 @@ myApp.controller('ActiveBillController', ActiveBillController);
 myApp.controller('NewBillController', NewBillController);
 
 myApp.controller('HouseCommitteesController', HouseCommitteesController);
+myApp.controller('SenateCommitteesController', SenateCommitteesController);
+myApp.controller('JointCommitteesController', JointCommitteesController);
 
 myApp.controller('SortPageController', SortPageController);
