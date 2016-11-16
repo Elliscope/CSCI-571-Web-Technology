@@ -15,7 +15,6 @@ function SortByStateController($scope,$http) {
      $http.get("backend/index.php?category=legistlator&chamber=&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
-        console.log($scope.people_data);
                 for (var i = 0; i <= response.data.count; i++) {
                   $scope.people_data[i].party = $scope.people_data[i].party.toLowerCase();
 
@@ -35,24 +34,17 @@ function SortByStateController($scope,$http) {
     });
 
   $scope.pageChangeHandler = function(num) {
-      console.log('list page changed to ' + num);
+
   };
 
   $scope.viewDetails = function(bioguide,chamber,state){
-    console.log("HERE INSDIE THE VIEW DETAILS FUNCTION");
-    console.log(bioguide);
-    console.log(chamber);
-    console.log(state);
 
     //have the bioguide value. Call three function to get the info separately.
 
     //reget the personal info: 
      $http.get("backend/index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
     .then(function(response) {
-        console.log("HERE IS THE BIOGUIDE SEARCH FUNCTION");
         $scope.bio_basic = response.data.results;
-        console.log($scope.bio_basic);
-        
         updateBioBasicInfo($scope.bio_basic);
         $("#myCarousel").carousel("next");
     });
@@ -60,9 +52,7 @@ function SortByStateController($scope,$http) {
   //get the bills that the legistlator sponsors
   $http.get("backend/index.php?category=bills&bioguide="+bioguide)
     .then(function(response) {
-        console.log("HERE IS IS THE BILLS SEARCH FUNCTION");
         $scope.bio_bills = response.data.results;
-        console.log($scope.bio_bills);
         updateBillInfo($scope.bio_bills);
     });
 
@@ -70,21 +60,16 @@ function SortByStateController($scope,$http) {
   //get the committee that the legistlator belongs to
     $http.get("backend/index.php?category=committees&bioguide="+bioguide)
     .then(function(response) {
-        console.log("HERE IS IS THE COMMITTEES SEARCH FUNCTION");
         $scope.bio_com = response.data.results;
         updateCommitteeInfo($scope.bio_com);
-        console.log($scope.bio_com);
 
     });
-
-
   };
 
 }
 
 function SortByStatePageController($scope) {
   $scope.pageChangeHandler = function(num) {
-    console.log('going to page ' + num);
   };
 }
 
