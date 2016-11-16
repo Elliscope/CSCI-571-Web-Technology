@@ -28,7 +28,6 @@
             </ul>
         </div>
         <div id="wrapper">
-
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
@@ -59,224 +58,267 @@
 
                                     <div class="tab-content">
                                         <div class="container">
-                                      <br>
-                                      <div id="myCarousel" class="slide" data-ride="carousel" data-interval="false">
-                                        <!-- Indicators -->
-                                        <ol class="carousel-indicators">
-                                          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                          <li data-target="#myCarousel" data-slide-to="1"></li>
-                                        </ol>
+                                            <br>
+                                            <div id="myCarousel" class="slide" data-ride="carousel" data-interval="false">
+                                                <!-- Indicators -->
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                                </ol>
 
-                                        <!-- Wrapper for slides -->
-                                        <div class="carousel-inner" role="listbox">
-                                          <div class="item active">
-                                            <ul class="nav nav-tabs">
-                                                <li class="active"><a data-toggle="tab" href="#data_wrapper_by_state">By State</a>
-                                                </li>
-                                                <li><a data-toggle="tab" href="#data_wrapper_by_house">House</a>
-                                                </li>
-                                                <li><a data-toggle="tab" href="#data_wrapper_by_senate">Senate</a>
-                                                </li>   
-                                            </ul>
-                                            <div id="data_wrapper_by_state" class="tab-pane fade in active well">
-                                                <nav class="navbar navbar-default">
-                                                    <div class="container-fluid">
-                                                        <div class="navbar-header">
-                                                            <a class="navbar-brand" href="#">Legistator By State</a>
+                                                <!-- Wrapper for slides -->
+                                                <div class="carousel-inner" role="listbox">
+                                                    <div class="item active">
+                                                        <div class="container">
+                                                            <h2>Example tab 2 (using standard nav-tabs)</h2></div>
+
+                                                        <div class="container">
+                                                            <ul class="nav nav-tabs">
+                                                                <li class="active">
+                                                                    <a href="#data_wrapper_by_state" data-toggle="tab">By State</a>
+                                                                </li>
+                                                                <li><a href="#data_wrapper_by_house" data-toggle="tab">House</a>
+                                                                </li>
+                                                                <li><a href="#data_wrapper_by_senate" data-toggle="tab">Senate</a>
+                                                                </li>
+                                                            </ul>
+
+                                                            <div class="tab-content ">
+                                                                <div class="tab-pane active" id="data_wrapper_by_state">
+
+                                                                    <nav class="navbar navbar-default">
+                                                                        <div class="container-fluid">
+                                                                            <div class="navbar-header">
+                                                                                <a class="navbar-brand" href="#">Legistator By State</a>
+                                                                            </div>
+                                                                            <ul class="nav navbar-nav navbar-right">
+                                                                                <form class="navbar-form" role="search">
+                                                                                    <select ng-model="q" id="search" class="form-control">
+                                                                                        <option selected value="">All States</option>
+                                                                                        <option value="Alabama">Alabama</option>
+                                                                                        <option value="Alaska">Alaska</option>
+                                                                                        <option value="Arizona">Arizona</option>
+                                                                                        <option value="Arkansas">Arkansas</option>
+                                                                                        <option value="California">California</option>
+                                                                                        <option value="Colorado">Colorado</option>
+                                                                                        <option value="Connecticut">Connecticut</option>
+                                                                                        <option value="Delaware">Delaware</option>
+                                                                                        <option value="District of Columbia">District Of Columbia</option>
+                                                                                        <option value="Florida">Florida</option>
+                                                                                        <option value="Georgia">Georgia</option>
+                                                                                        <option value="Hawaii">Hawaii</option>
+                                                                                        <option value="Idaho">Idaho</option>
+                                                                                        <option value="Illinois">Illinois</option>
+                                                                                        <option value="Indiana">Indiana</option>
+                                                                                        <option value="Iowa">Iowa</option>
+                                                                                        <option value="Kansas">Kansas</option>
+                                                                                        <option value="Kentucky">Kentucky</option>
+                                                                                        <option value="Louisiana">Louisiana</option>
+                                                                                        <option value="Maine">Maine</option>
+                                                                                        <option value="Maryland">Maryland</option>
+                                                                                        <option value="Massachusetts">Massachusetts</option>
+                                                                                        <option value="Michigan">Michigan</option>
+                                                                                        <option value="Minnesota">Minnesota</option>
+                                                                                        <option value="Mississippi">Mississippi</option>
+                                                                                        <option value="Missouri">Missouri</option>
+                                                                                        <option value="Montana">Montana</option>
+                                                                                        <option value="Nebraska">Nebraska</option>
+                                                                                        <option value="Nevada">Nevada</option>
+                                                                                        <option value="New Hampshire">New Hampshire</option>
+                                                                                        <option value="New Jersey">New Jersey</option>
+                                                                                        <option value="New Mexico">New Mexico</option>
+                                                                                        <option value="New York">New York</option>
+                                                                                        <option value="North Carolina">North Carolina</option>
+                                                                                        <option value="North Dakota">North Dakota</option>
+                                                                                        <option value="Ohio">Ohio</option>
+                                                                                        <option value="Oklahoma">Oklahoma</option>
+                                                                                        <option value="Oregon">Oregon</option>
+                                                                                        <option value="Pennsylvania">Pennsylvania</option>
+                                                                                        <option value="Rhode Island">Rhode Island</option>
+                                                                                        <option value="South Carolina">South Carolina</option>
+                                                                                        <option value="South Dakota">South Dakota</option>
+                                                                                        <option value="Tennessee">Tennessee</option>
+                                                                                        <option value="Texas">Texas</option>
+                                                                                        <option value="Utah">Utah</option>
+                                                                                        <option value="Vermont">Vermont</option>
+                                                                                        <option value="Virginia">Virginia</option>
+                                                                                        <option value="Washington">Washington</option>
+                                                                                        <option value="West Virginia">West Virginia</option>
+                                                                                        <option value="Wisconsin">Wisconsin</option>
+                                                                                        <option value="Wyoming">Wyoming</option>
+                                                                                    </select>
+                                                                                </form>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </nav>
+                                                                    <div>
+                                                                        <div ng-controller="SortByStateController" class="my-controller">
+                                                                            <br>
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-body">
+                                                                                    <table class="table">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th> Party </th>
+                                                                                                <th> Name </th>
+                                                                                                <th>Chamber</th>
+                                                                                                <th>District</th>
+                                                                                                <th> State </th>
+                                                                                                <th> </th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr dir-paginate="person in people_data | filter:(!!q|| undefined) && {state_name: q}:true | orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                                <td>
+                                                                                                    <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                                </td>
+                                                                                                <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                                <td>
+                                                                                                    <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                                </td>
+                                                                                                <td>{{person.district_name}}</td>
+                                                                                                <td>{{person.state_name}}</td>
+                                                                                                <td>
+                                                                                                    <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div ng-controller="SortByStatePageController" class="other-controller">
+                                                                            <div class="text-center">
+                                                                                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane" id="data_wrapper_by_house">
+                                                                    <label for="search">Search:</label>
+                                                                    <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                </div>
+                                                                <div class="tab-pane" id="data_wrapper_by_senate">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <ul class="nav navbar-nav navbar-right">
-                                                            <form class="navbar-form" role="search">
-                                                                <select ng-model="q" id="search" class="form-control">
-                                                                    <option selected value="">All States</option>
-                                                                    <option value="Alabama">Alabama</option>
-                                                                    <option value="Alaska">Alaska</option>
-                                                                    <option value="Arizona">Arizona</option>
-                                                                    <option value="Arkansas">Arkansas</option>
-                                                                    <option value="California">California</option>
-                                                                    <option value="Colorado">Colorado</option>
-                                                                    <option value="Connecticut">Connecticut</option>
-                                                                    <option value="Delaware">Delaware</option>
-                                                                    <option value="District of Columbia">District Of Columbia</option>
-                                                                    <option value="Florida">Florida</option>
-                                                                    <option value="Georgia">Georgia</option>
-                                                                    <option value="Hawaii">Hawaii</option>
-                                                                    <option value="Idaho">Idaho</option>
-                                                                    <option value="Illinois">Illinois</option>
-                                                                    <option value="Indiana">Indiana</option>
-                                                                    <option value="Iowa">Iowa</option>
-                                                                    <option value="Kansas">Kansas</option>
-                                                                    <option value="Kentucky">Kentucky</option>
-                                                                    <option value="Louisiana">Louisiana</option>
-                                                                    <option value="Maine">Maine</option>
-                                                                    <option value="Maryland">Maryland</option>
-                                                                    <option value="Massachusetts">Massachusetts</option>
-                                                                    <option value="Michigan">Michigan</option>
-                                                                    <option value="Minnesota">Minnesota</option>
-                                                                    <option value="Mississippi">Mississippi</option>
-                                                                    <option value="Missouri">Missouri</option>
-                                                                    <option value="Montana">Montana</option>
-                                                                    <option value="Nebraska">Nebraska</option>
-                                                                    <option value="Nevada">Nevada</option>
-                                                                    <option value="New Hampshire">New Hampshire</option>
-                                                                    <option value="New Jersey">New Jersey</option>
-                                                                    <option value="New Mexico">New Mexico</option>
-                                                                    <option value="New York">New York</option>
-                                                                    <option value="North Carolina">North Carolina</option>
-                                                                    <option value="North Dakota">North Dakota</option>
-                                                                    <option value="Ohio">Ohio</option>
-                                                                    <option value="Oklahoma">Oklahoma</option>
-                                                                    <option value="Oregon">Oregon</option>
-                                                                    <option value="Pennsylvania">Pennsylvania</option>
-                                                                    <option value="Rhode Island">Rhode Island</option>
-                                                                    <option value="South Carolina">South Carolina</option>
-                                                                    <option value="South Dakota">South Dakota</option>
-                                                                    <option value="Tennessee">Tennessee</option>
-                                                                    <option value="Texas">Texas</option>
-                                                                    <option value="Utah">Utah</option>
-                                                                    <option value="Vermont">Vermont</option>
-                                                                    <option value="Virginia">Virginia</option>
-                                                                    <option value="Washington">Washington</option>
-                                                                    <option value="West Virginia">West Virginia</option>
-                                                                    <option value="Wisconsin">Wisconsin</option>
-                                                                    <option value="Wyoming">Wyoming</option>
-                                                                </select>
-                                                            </form>
-                                                        </ul>
+
                                                     </div>
-                                                </nav>
-                                                <div>
-                                                            <div ng-controller="SortByStateController" class="my-controller">
-                                                                <br>
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-body">
-                                                                        <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th> Party </th>
-                                                                                    <th> Name </th>
-                                                                                    <th>Chamber</th>
-                                                                                    <th>District</th>
-                                                                                    <th> State </th>
-                                                                                    <th>       </th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr dir-paginate="person in people_data | filter:(!!q|| undefined) && {state_name: q}:true | orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
-                                                                                    <td>
-                                                                                        <img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
-                                                                                    </td>
-                                                                                    <td>{{person.first_name}} {{person.last_name}}</td>
-                                                                                    <td>
-                                                                                        <img width='30' height='30' src = http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
-                                                                                    </td>
-                                                                                    <td>{{person.district_name}}</td>
-                                                                                    <td>{{person.state_name}}</td>
-                                                                                    <td>
-                                                                                        <button  ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
+
+                                                    <div class="item">
+
+                                                        <button href="#myCarousel" data-slide="prev" type='button' class='glyphicon glyphicon-menu-left btn-lg'>Details</button>
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-body">
+                                                                <div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="col-lg-6">
+                                                                            <div class="col-lg-4">
+                                                                                <img width='140' height='190' id="pro_img" src="">
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td id="pro_name"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td id="pro_email"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Chamber</td>
+                                                                                        <td id="pro_chamber"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td id="pro_contact"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><img height='30px' width='30px' id="pro_party_img" src=""></td>
+                                                                                        <td id="pro_party"></td>
+                                                                                        <tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <h4>Committees</h4>
+                                                                            <hr>
+                                                                            <table id="personal_com">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th> Chamber </th>
+                                                                                        <th> Committee ID </th>
+                                                                                        <th> Name</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="col-lg-6">
+                                                                                <table id="personal_basic">
+                                                                                    <tr>
+                                                                                        <td>Start Term</td>
+                                                                                        <td id="st_val">Start Term</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>End Term</td>
+                                                                                        <td id="en_val">End Term</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Term</td>
+                                                                                        <td id="te_val">Term</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Office</td>
+                                                                                        <td id="of_val">Office</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>State</td>
+                                                                                        <td id="sta_val">State</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Birthday</td>
+                                                                                        <td id="bir_val">Birthday</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Fax</td>
+                                                                                        <td id="fa_val">Fax</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Social Links </td>
+
+                                                                                        <td>
+                                                                                            <a id="tw_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png'></a>
+                                                                                            <a id="fb_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/f.png'></a>
+                                                                                            <a id="wb_link" href=""><img height='30px' width='30px' src='http://cs-server.usc.edu:45678/hw/hw8/images/w.png'></a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="col-lg-6">
+                                                                                <h4>Bills</h4>
+                                                                                <hr>
+                                                                                <table id="personal_bills">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th> Bill ID </th>
+                                                                                            <th> Title </th>
+                                                                                            <th> Chamber</th>
+                                                                                            <th> Congress</th>
+                                                                                            <th> Link</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                            <div ng-controller="SortByStatePageController" class="other-controller">
-                                                                <div class="text-center">
-                                                                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
-                                                                </div>
-                                                            </div>
-                                                </div>
-                                            </div>
-                                            <div id="data_wrapper_by_house" class="tab-pane fade">
-                                                <label for="search">Search:</label>
-                                                <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
-                                            </div>
-                                            <div id="data_wrapper_by_senate" class="tab-pane fade">
-                                            </div>
-                                          </div>
-
-                                          <div class="item">
-                                         
-                                 
-                                     <button href="#myCarousel" data-slide="prev"type='button' class='glyphicon glyphicon-menu-left btn-lg'>Details</button>   
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div>
-                                                        <div class="col-lg-12">
-                                                         <div class="col-lg-6">
-                                                            <div class="col-lg-4">
-                                                                <img width='140' height='190' id="pro_img" src="">
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                            <table>
-                                                                <tr><td id="pro_name"></td></tr>
-                                                                <tr><td id="pro_email"></td></tr>
-                                                                <tr><td>Chamber</td><td id="pro_chamber"></td></tr>
-                                                                <tr><td id="pro_contact"></td></tr>
-                                                                <tr><td><img height='30px' width='30px' id="pro_party_img" src=""></td><td id="pro_party"></td><tr>
-                                                            </table>
-                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <h4>Committees</h4>
-                                                            <hr>
-                                                            <table id="personal_com">
-                                                                <thead>
-                                                                  <tr>
-                                                                    <th> Chamber </th>
-                                                                    <th> Committee ID </th>
-                                                                    <th> Name</th>
-                                                                  </tr>
-                                                                </thead>
-                                                            </table>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="col-lg-6">
-                                                                <table id="personal_basic">
-                                                                    <tr><td>Start Term</td><td id="st_val">Start Term</td></tr>
-                                                                    <tr><td>End Term</td><td id="en_val">End Term</td></tr>
-                                                                    <tr><td>Term</td><td id="te_val">Term</td></tr>
-                                                                    <tr><td>Office</td><td id="of_val">Office</td></tr>
-                                                                    <tr><td>State</td><td id="sta_val">State</td></tr>
-                                                                    <tr><td>Birthday</td><td id="bir_val">Birthday</td></tr>
-                                                                    <tr><td>Fax</td><td id="fa_val">Fax</td></tr>
-                                                                    <tr><td>Social Links   </td>
-                                                                        
-                                                                    <td><a  id="tw_link"  href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png'></a>
-                                                                    <a id="fb_link"  href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/f.png'></a>
-                                                                    <a id="wb_link" href=""><img height='30px' width='30px'src='http://cs-server.usc.edu:45678/hw/hw8/images/w.png'></a>           </td></tr>
-                                                                </table>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                 <h4>Bills</h4>
-                                                                 <hr>
-                                                                <table id="personal_bills">
-                                                                    <thead>
-                                                                      <tr>
-                                                                        <th> Bill ID </th>
-                                                                        <th> Title </th>
-                                                                        <th> Chamber</th>
-                                                                        <th> Congress</th>
-                                                                        <th> Link</th>
-                                                                      </tr>
-                                                                    </thead>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                       
-                                            
-                                          </div>
                                         </div>
-                                      </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
