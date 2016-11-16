@@ -83,7 +83,7 @@ function SortByHouseController($scope,$http) {
   $scope.bio_com = [];
 
     var php_path = "backend/index.php?";
-     $http.get("backend/index.php?category=legistlator&chamber=&keyword=")
+     $http.get("backend/index.php?category=legistlator&chamber=house&keyword=")
     .then(function(response) {
         $scope.people_data = response.data.results;
                 for (var i = 0; i <= response.data.count; i++) {
@@ -140,6 +140,77 @@ function SortByHouseController($scope,$http) {
 }
 
 function SortByHousePageController($scope) {
+  $scope.pageChangeHandler = function(num) {
+  };
+}
+
+function SortBySenateController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+    var php_path = "backend/index.php?";
+     $http.get("backend/index.php?category=legistlator&chamber=senate&keyword=")
+    .then(function(response) {
+        $scope.people_data = response.data.results;
+                for (var i = 0; i <= response.data.count; i++) {
+                  $scope.people_data[i].party = $scope.people_data[i].party.toLowerCase();
+
+                  if($scope.people_data[i].chamber =="house"){
+                    $scope.people_data[i].chamber_img = "h.png";
+                    $scope.people_data[i].chamber = "House";
+                  }else{
+                    $scope.people_data[i].chamber_img = "s.svg";
+                    $scope.people_data[i].chamber = "Senate";
+                  }
+                  if($scope.people_data[i].district == null){
+                    $scope.people_data[i].district_name = "N.A";
+                  }else{
+                    $scope.people_data[i].district_name =  "District "+$scope.people_data[i].district;
+                  }
+                }
+    });
+
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("backend/index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("backend/index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("backend/index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
+
+function SortBySenatePageController($scope) {
   $scope.pageChangeHandler = function(num) {
   };
 }
@@ -210,3 +281,6 @@ myApp.controller('SortByStatePageController', SortByStatePageController);
 
 myApp.controller('SortByHouseController', SortByHouseController);
 myApp.controller('SortByHousePageController', SortByHousePageController);
+
+myApp.controller('SortBySenateController', SortBySenateController);
+myApp.controller('SortBySenatePageController', SortBySenatePageController);

@@ -251,6 +251,65 @@
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane" id="data_wrapper_by_senate">
+
+                                                         
+
+                                                            <nav class="navbar navbar-default">
+                                                                <div class="container-fluid">
+                                                                    <div class="navbar-header">
+                                                                        <a class="navbar-brand" href="#">Legistator By Senate</a>
+                                                                    </div>
+                                                                    <ul class="nav navbar-nav navbar-right">
+                                                                        <form class="navbar-form" role="search">
+                                                                              <label for="search">Search:</label>
+                                                                              <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                                                                        </form>
+                                                                    </ul>
+                                                                </div>
+                                                            </nav>
+                                                            <div>
+                                                                <div ng-controller="SortBySenateController" class="my-controller">
+                                                                    <br>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th> Party </th>
+                                                                                        <th> Name </th>
+                                                                                        <th>Chamber</th>
+                                                                                        <th>District</th>
+                                                                                        <th> State </th>
+                                                                                        <th> </th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                        <td>
+                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                        </td>
+                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>
+                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                        </td>
+                                                                                        <td>{{person.district_name}}</td>
+                                                                                        <td>{{person.state_name}}</td>
+                                                                                        <td>
+                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div ng-controller="SortBySenatePageController" class="other-controller">
+                                                                    <div class="text-center">
+                                                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
