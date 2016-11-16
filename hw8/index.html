@@ -535,32 +535,32 @@
                                                                 </div>
                                                             </nav>
                                                             <div>
-                                                                <div ng-controller="SortBySenateController" class="my-controller">
+                                                                <div ng-controller="NewBillController" class="my-controller">
                                                                     <br>
                                                                     <div class="panel panel-default">
                                                                         <div class="panel-body">
-                                                                            <table class="table">
+                                                                             <table class="table">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th> Party </th>
-                                                                                        <th> Name </th>
-                                                                                        <th>Chamber</th>
-                                                                                        <th> State </th>
+                                                                                        <th> Bill ID </th>
+                                                                                        <th> Bill Type </th>
+                                                                                        <th> Chamber </th>
+                                                                                        <th> Introduced On </th>
+                                                                                        <th> Sponsor </th>
                                                                                         <th> </th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr dir-paginate="person in people_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
-                                                                                        <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.party}}.png>
+                                                                                    <tr dir-paginate="bill in new_bill_data | filter:q| orderBy:'state_name'| itemsPerPage:pageSize" current-page="currentPage">
+                                                                                        <td>{{bill.bill_id}}
                                                                                         </td>
-                                                                                        <td>{{person.first_name}} {{person.last_name}}</td>
+                                                                                        <td>{{bill.bill_type}}</td>
                                                                                         <td>
-                                                                                            <img width='30' height='30' src=http://cs-server.usc.edu:45678/hw/hw8/images/{{person.chamber_img}}>{{person.chamber}}
+                                                                                            {{bill.chamber}}
                                                                                         </td>
-                                                                                        <td>{{person.state_name}}</td>
+                                                                                        <td>{{bill.introduced_on}}</td>
                                                                                         <td>
-                                                                                            <button ng-click="viewDetails(person.bioguide_id,person.chamber,person.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
+                                                                                            <button ng-click="viewDetails(bill.bioguide_id,bill.chamber,bill.state)" href="#myCarousel" class='btn btn-primary'>View Details</button>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </tbody>

@@ -214,27 +214,64 @@ function ActiveBillController($scope,$http) {
 
 
     var php_path = "index.php?";
-     $http.get("index.php?category=bills")
+     $http.get("index.php?category=bills&bill_active=true")
     .then(function(response) {
         $scope.bill_data = response.data.results;
-        console.log(response.data);
+        console.log("Active Bill Data");
         console.log($scope.bill_data);
-                for (var i = 0; i <= response.data.count; i++) {
-                  // $scope.bill_data[i].party = $scope.bill_data[i].party.toLowerCase();
+    });
 
-                  // if($scope.bill_data[i].chamber =="house"){
-                  //   $scope.bill_data[i].chamber_img = "h.png";
-                  //   $scope.bill_data[i].chamber = "House";
-                  // }else{
-                  //   $scope.bill_data[i].chamber_img = "s.svg";
-                  //   $scope.bill_data[i].chamber = "Senate";
-                  // }
-                  // if($scope.bill_data[i].district == null){
-                  //   $scope.bill_data[i].district_name = "N.A";
-                  // }else{
-                  //   $scope.bill_data[i].district_name =  "District "+$scope.bill_data[i].district;
-                  // }
-                }
+  $scope.pageChangeHandler = function(num) {
+
+  };
+
+  $scope.viewDetails = function(bioguide,chamber,state){
+
+    //have the bioguide value. Call three function to get the info separately.
+
+    //reget the personal info: 
+     $http.get("index.php?category=legistlator&chamber="+chamber.toLowerCase()+"&keyword="+state+"&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_basic = response.data.results;
+        updateBioBasicInfo($scope.bio_basic);
+        $("#myCarousel").carousel("next");
+    });
+
+  //get the bills that the legistlator sponsors
+  $http.get("index.php?category=bills&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_bills = response.data.results;
+        updateBillInfo($scope.bio_bills);
+    });
+
+
+  //get the committee that the legistlator belongs to
+    $http.get("index.php?category=committees&bioguide="+bioguide)
+    .then(function(response) {
+        $scope.bio_com = response.data.results;
+        updateCommitteeInfo($scope.bio_com);
+
+    });
+  };
+
+}
+
+function NewBillController($scope,$http) {
+
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
+  $scope.people_data= [];
+  $scope.bio_basic = [];
+  $scope.bio_bills = [];
+  $scope.bio_com = [];
+
+
+    var php_path = "index.php?";
+     $http.get("index.php?category=bills&bill_active=false")
+    .then(function(response) {
+        $scope.new_bill_data = response.data.results;
+        console.log("New Bill Data");
+        console.log($scope.new_bill_data);
     });
 
   $scope.pageChangeHandler = function(num) {
@@ -347,6 +384,7 @@ myApp.controller('SortByHouseController', SortByHouseController);
 
 myApp.controller('SortBySenateController', SortBySenateController);
 myApp.controller('ActiveBillController', ActiveBillController);
+myApp.controller('NewBillController', NewBillController);
 
 
 myApp.controller('SortPageController', SortPageController);
