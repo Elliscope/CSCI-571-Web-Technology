@@ -1,0 +1,191 @@
+body {
+    background-color: #F7F6F2;
+}
+
+
+h {
+	font-family: "Trebuchet MS";
+}
+
+p{
+	font-family: "Trebuchet MS";
+}
+
+u{
+	font-family: "Trebuchet MS";
+}
+
+#super{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.red_color{
+	color:#e60000;
+}
+
+.text-bold{
+	font-weight: bold;
+}
+
+.img-border{
+	border:2px solid #A9A9A9;
+	
+}
+
+.floating-box-img {
+    float: right;
+    margin:40px;
+}
+
+
+ul {
+    list-style-type: none;
+    margin-bottom:  20px;
+    margin-top:     20px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000;
+    border-radius: 5px 5px 5px 	5px;
+    height: 35px;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 8px;
+    color:   white;
+    margin-left: 6px;
+    margin-right:3px;
+
+}
+
+a {
+    color: #e60000;
+    width: 60px;
+    text-align: center;
+}
+a:hover {
+    background-color: red;
+    border-radius: 5px 5px 5px 	5px;
+}
+#bar_left{
+	margin-left: 45px;
+}
+
+#bar_right{
+	margin-right: 20px;
+}
+
+#header_row{
+	height: 200px;
+}
+
+.floating-box {
+    float: left;
+    width: 300px;
+    height: 175px;
+    margin: 10px;
+}
+
+
+
+#content_row{
+	height: 400px;
+}
+
+.content-box-left {
+    float: left;
+    width: 200px;
+    height: 175px;
+    margin-left: 40px;
+}
+
+.content-box-right {
+    float: right;
+    width: 350px;
+    height: 175px;
+    margin: 10px;
+}
+
+.break-line{
+	width:600px;
+}
+
+.center-aligh{
+	text-align: center;
+}
+
+#link_row{
+    height: 90px;
+}
+#blogroll-1{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 40px;
+    float: left;
+}
+
+#blogroll-2{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: 90px;
+    float: left;
+}
+
+#social{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    width: 190px;
+    float: right;
+}
+
+#bottom_row{
+	height: 120px;
+}
+
+.bot-row-left{
+	float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.bot-row-middle{	
+	float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.bot-row-right{
+    float: right;
+    width: 600px;
+}
+
+.center_box {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50em
+
+}
+
+.white_box{
+	background-color: white;
+	margin-top: 40px;
+    margin-bottom: 40px;
+	border-radius: 5px 5px 5px 	5px;
+}
+
+
+.bot-line{
+	text-align: right;
+}
+
+
+

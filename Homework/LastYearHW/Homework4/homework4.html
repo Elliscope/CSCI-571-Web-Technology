@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="text/javascript">
+
+function loadXML(url) {
+	var xmlDoc;
+
+	if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();	
+	} else {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlHttp.open("GET", url, false);
+	xmlHttp.send();
+	if (xmlHttp.readyState == 4 && xmlHttp.status != 200) {
+		throw "Not found";
+	}
+	xmlDoc = xmlHttp.responseXML;
+	return xmlDoc;
+}
+
+function submit_query(url) {
+	var doc;
+	var comArr;
+	var tbtArr;
+
+	if (!url) {
+		window.alert("URL can't be empty");
+		return false;
+	}
+
+	try {
+		doc = loadXML(url);
+	} catch (error) {
+		if (error == "Not found") {
+			window.alert("No XML is found");
+		} else {
+			window.alert("Error in XML file");
+		}
+		
+		return false;
+	}
+
+	if (!doc) {
+		window.alert("Error in XML file");
+		return false;
+	}
+
+	comArr = doc.getElementsByTagName("Row");
+
+	if (!comArr || comArr.length == 0) {
+		window.alert("No Network Company in XML");
+		return false;
+	}
+
+	tbtArr = doc.getElementsByTagName("Data");
+
+	var win = window.open("", "", "height=500, width=1000, scrollbars=yes");
+
+	win.document.write('<table border="1" align="center"><tr>');
+
+	for (var i = 0; i < tbtArr.length; i++) {
+		win.document.write('<th>' + tbtArr[i].innerHTML + '</th>');
+	};
+
+	win.document.write('</tr>');
+
+	for (var i = 0; i < comArr.length; i++) {
+		win.document.write('<tr><td>' + comArr[i].children[0].innerHTML + '</td>');
+		win.document.write('<td>' + comArr[i].children[1].innerHTML + '</td>');
+
+		var feedsArr = comArr[i].getElementsByTagName("Feed")
+		if (!feedsArr || feedsArr.length == 0) {
+			win.document.write('<td></td>');
+		} else {
+			win.document.write('<td><ul>');
+			for (var j = 0; j < feedsArr.length; j++) {
+				if (feedsArr[j].innerHTML != '')
+					win.document.write('<li>' + feedsArr[j].innerHTML + '</li>');
+			}
+			win.document.write('</ul></td>');
+		}
+
+		win.document.write('<td>' + comArr[i].children[3].innerHTML + '</td>');
+		win.document.write('<td><a href="' + comArr[i].children[4].innerHTML + '">' + comArr[i].children[4].innerHTML + '</a></td>');
+		win.document.write('<td>');
+		if (comArr[i].children[5].innerHTML != '')
+			win.document.write('<img src="' + comArr[i].children[5].innerHTML + '"></img>');
+		win.document.write('</td></tr>');
+	}
+
+	win.document.write('</table>');
+	win.document.close();
+
+	return true;
+}
+
+</script>
+	<meta charset="UTF-8">
+	<title>Homework 4</title>
+
+</head>
+<body>
+	<div align="center">
+		<form>Enter URL for Company List XML File
+			<br>
+			<br>
+			<input type="text" size=60 name="xmlURL" value="">
+			<br>
+			<br>
+			<input type="button" value="Submit Query" onClick="submit_query(xmlURL.value)">
+		</form>
+	</div>
+<noscript>
+</body>
+</html>

@@ -1,0 +1,179 @@
+
+<!DCOTYPE html >
+<html>
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>hw4</title>
+</head>
+
+
+<style>
+.header-margin {
+    margin-top: 90px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-center{
+	text-align: center;
+}
+
+.form-margin{
+    margin-top: 10px;
+}
+
+
+</style>
+
+
+
+
+<script>
+
+function generateHTML(xmlDoc)
+   {  ELEMENT_NODE = 1;    // MS parser doesn't define Node.ELEMENT_NODE
+           root=xmlDoc.DocumentElement;
+           html_text="<html><head><title>HW4 XML NewsList Parse</title></head><body>";
+           html_text+="<table border='2'>";
+
+           newsRow=xmlDoc.getElementsByTagName("Row");
+           newsCity=xmlDoc.getElementsByTagName("City");
+           newsState=xmlDoc.getElementsByTagName("State");
+
+           newsNodeList=newsRow.item(0).childNodes;
+           html_text+="<tbody>";
+           html_text+="<tr>";
+           x=0;  y=0;
+
+
+          // output the headers
+           for(i=0;i<newsNodeList.length;i++)
+           {  if(newsNodeList.item(i).nodeType==ELEMENT_NODE)
+         {  header=newsNodeList.item(i).nodeName;
+           if(header=="Slot")
+           {  header="The Slot";  x=120;  y=55;  }
+           if(header=="Newspaper")
+           {  header="Newspaper";  x=100;  y=67;  }
+           if(header=="Location")
+               header="City/State";
+           if(header=="HomePage")  header="HomePage";
+           if(header=="Logo")    header="Logo";
+           html_text+="<th>"+header+"</th>";  }   }
+           html_text+="</tr>";
+
+           // output out the values
+           for(i=0;i<newsRow.length;i++) //do for all newsRow
+           {  newsNodeList=newsRow.item(i).childNodes; //get properties of a newsRow
+               html_text+="<tr>";      //start a new row of the output table
+               for(j=0;j<newsNodeList.length;j++)
+               {  if(newsNodeList.item(j).nodeType==ELEMENT_NODE)
+              {
+      if(newsNodeList.item(j).nodeName=="Logo")
+        {//handle images separately
+      html_text+="<td><img src='"+newsNodeList.item(j).firstChild.nodeValue+"' width='"+x+"' height='"+y+"'></td>";  }    
+    else if(newsNodeList.item(j).nodeName=="Location"){
+        child = newsNodeList.item(j).childNodes;
+        html_text +="<td>";
+        html_text += "<ul>";
+        if(newsCity.item(i).firstChild!=null){
+          html_text += "<li>"+newsCity.item(i).firstChild.nodeValue+"</li>";
+        }
+        if(newsState.item(i).firstChild!=null){
+          html_text += "<li>"+newsState.item(i).firstChild.nodeValue+"</li>";
+        }
+        html_text += "</ul>";
+        html_text +="</td>";
+    }
+    else {
+html_text+="<td>"+newsNodeList.item(j).firstChild.nodeValue+"</td>";
+    }   }    }
+               html_text+="</tr>";  }
+           html_text+="</tbody>";  html_text+="</table>";
+           html_text+="</body></html>";  
+}
+
+function viewXML(what)
+{
+  var URL = what.URL.value;
+  var xmlDoc ;
+  //ERROR CHECKING
+
+  //test if the URL is empty or not
+  if(!URL){
+       alert("The URL is empty");
+       return;
+  }
+
+  function loadXML(url) {
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+       xmlhttp=new XMLHttpRequest();   }
+ else {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");  }
+  xmlhttp.open("GET",url,false);
+  xmlhttp.send();
+  xmlDoc=xmlhttp.responseXML;
+  return xmlDoc;   
+}
+
+
+  //test if the format and loading process is correct
+  try {
+      xmlDoc = loadXML(URL);
+  } catch (error) {
+    if (error == "Not found") {
+      window.alert("No XML is found");
+    } else {
+      window.alert("Error in XML file");
+    }
+    
+    return ;
+  }
+
+  if(xmlDoc==null){
+    alert("No XML is found");
+    return;
+  }
+
+
+
+ if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+ {  if (xmlDoc.parseError.errorCode != 0) {
+    var myErr = xmlDoc.parseError;
+    generateError(xmlDoc);
+    hWin = window.open("", "Error", "scrollbars=yes");
+    hWin.document.write(html_text);
+  } else {  generateHTML(xmlDoc);
+            hWin = window.open("", "Assignment4", "scrollbars=yes");
+            hWin.document.write(html_text);   }
+ } else //else if FF, execute script once XML object has loaded
+ {  
+    var rowData = xmlDoc.getElementsByTagName("Row");
+
+    if (!rowData || rowData.length == 0) {
+      alert("No News Data in XML");
+      return;
+    }
+
+    xmlDoc.onload=generateHTML(xmlDoc);
+    hWin = window.open("", "Assignment4", "scrollbars=yes");
+    hWin.document.write(html_text);  }
+ hWin.document.close();  }
+ </script>
+ </head>
+
+
+<body data-pinterest-extension-installed="cr1.39.2">
+  <h4 class="header-margin">Enter URL for Newspaper List XML File</h4>
+  <form name="myform" method="POST" id="location" class="form-center">
+    <input type="text" name="URL" value="newslist.xml">
+    <br>
+    <input type="button" class = "form-margin" name="submit" value="Submit Query" onclick="viewXML(this.form)">
+  </form>
+
+<script type="text/javascript">( function(){ window.SIG_EXT = {}; } )()</script>
+</body>
+
+</html>
+
+
